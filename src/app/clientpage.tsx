@@ -4,7 +4,7 @@ import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import { motion } from 'framer-motion';
 import background from './assets/background/background.png';
-import { pixel } from './layout';
+import { pixel } from './font';
 
 export default function Home() {
   const [isFading, setIsFading] = useState(false);
