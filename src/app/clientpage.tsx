@@ -27,7 +27,7 @@ export default function Home() {
     >
       <div className="flex flex-col items-center justify-center h-full">
         <h1 className={`text-9xl ${pixel.variable} font-pixel text-white drop-shadow-lg animate-up-down`}>
-          Vintner's Quest
+          Vintner&#39;s Quest
         </h1>
         <button
           onClick={handleStart}
