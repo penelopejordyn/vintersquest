@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect, use } from 'react';
+import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { useRouter } from 'next/navigation';
 
@@ -15,7 +15,7 @@ export default function MustPage() {
   );
   const [addedYeast, setAddedYeast] = useState(false);
   const [addedAirlock, setAddedAirlock] = useState(false);
-  const { carboySize, abv, sweetness, fermentable, setFermentable } = useAppContext();
+  const { fermentable, } = useAppContext();
   const [ingredients, setIngredients] = useState<{ name: string; image: string | StaticImageData; added: boolean }[]>([]);
   const router = useRouter();
 
@@ -83,6 +83,7 @@ export default function MustPage() {
       { name: "airlock", image: "/assets/Airlock.png", added: false },
     ]);
     setAddedYeast(false);
+    console.log(addedAirlock)
     setAddedAirlock(false);
   };
 

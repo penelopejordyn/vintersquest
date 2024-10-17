@@ -39,6 +39,7 @@ export default function ClientPage() {
       } else {
         // Trigger fade out and navigate to carboy page
         setFadeOut(true);
+        console.log(fadeOut)
         setTimeout(() => {
           router.push('/carboy');
         }, 1000);  // Allow the fade-out to complete
