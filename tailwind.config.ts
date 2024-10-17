@@ -14,6 +14,7 @@ const config: Config = {
       },
       fontFamily: {
         pixel: ["var(--font-pixel)"],
+        pixel2: ["var(--font-pixel2)"],
       },
     },
   },

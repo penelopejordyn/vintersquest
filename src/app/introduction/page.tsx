@@ -29,8 +29,8 @@ export default function ClientPage() {
     setShowOption(false);  // Hide the Yes button
     setDialogueIndex(dialogueIndex + 1);  // Advance to "Wonderful!"
     setTimeout(() => {
-      router.push('/next-page');  // Fade to next page after 1 second
-    }, 5000);
+      router.push('/winery');  // Fade to next page after 1 second
+    }, 1500);
   };
 
   return (
@@ -54,7 +54,7 @@ export default function ClientPage() {
 
       {/* Translucent text box for dialogue */}
       <div className="absolute bottom-16 left-0 w-full p-6 bg-gray-800 bg-opacity-70 text-white">
-        <motion.p className="font-pixel text-2xl">
+        <motion.p className="font-pixel2 text-2xl">
           {wizardDialogue[dialogueIndex]}
         </motion.p>
       </div>
@@ -68,7 +68,7 @@ export default function ClientPage() {
           className=" text-center absolute bottom-0 left-0 w-full p-3 bg-gray-800 bg-opacity-70 text-white hover:bg-gray-700
           " onClick={handleYesClick}
         >
-            <p className="font-pixel text-4xl">Yes</p>
+            <p className="font-pixel2 text-4xl">Yes</p>
         </motion.div>
       )}
     </motion.div>

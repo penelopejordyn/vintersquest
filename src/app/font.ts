@@ -5,4 +5,9 @@ export const pixel = localFont({
     variable: "--font-pixel",
     weight: "100 900",
   });
+export const pixel2 = localFont({
+    src: "./fonts/Pixelon-E4JEg.otf",
+    variable: "--font-pixel",
+    weight: "100 900",
+  });
   

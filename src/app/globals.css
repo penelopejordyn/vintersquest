@@ -13,7 +13,14 @@
   font-family: 'pixel';
   src: url('./fonts/DiscotapixelRegularDemo-KVZYy.otf') format('opentype');
 }
+@font-face {
+  font-family: 'pixel2';
+  src: url('./fonts/Pixelon-E4JEg.otf') format('opentype');
+}
 
 .font-pixel {
   font-family: 'pixel', sans-serif;
+}
+.font-pixel2 {
+  font-family: 'pixel2', sans-serif;
 }
