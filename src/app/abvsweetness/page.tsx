@@ -3,8 +3,9 @@
 import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { useRouter } from 'next/navigation';
-import wizardImage from '../assets/wizard.png';
-import background from '../assets/background/winery.png';
+
+
+import { useAppContext } from '../context/AppContext';
 
 export default function ABVSweetnessPage() {
   const [dialogueIndex, setDialogueIndex] = useState(0);
@@ -13,19 +14,20 @@ export default function ABVSweetnessPage() {
   const [askedWaterQuestion, setAskedWaterQuestion] = useState(false);
   const [showSweetnessSlider, setShowSweetnessSlider] = useState(false);
   const [showABVSlider, setShowABVSlider] = useState(false);
-  const [sweetness, setSweetness] = useState(0.5);
+  const [sweetness, setSweetnesss] = useState(0.5);
   const [abv, setAbv] = useState(12.5);
   const [showContinue, setShowContinue] = useState(false);
   const [fadeOut, setFadeOut] = useState(false); // Track when to trigger the fade out
   const router = useRouter();
+  const { setABV, setSweetness } = useAppContext();
 
 
   const wizardDialogue = [
     "Now that we have our fermentable, we must create the must. Any questions?",
-    "Ah, an excellent question! The yeast requires sugar to ferment into alcohol...",
-    "Water is added to dilute the sugar content of the fermentable...",
-    "The ABV or alcohol by volume of the wine is determined by the amount of sugar in the must...",
-    "Now, how sweet would you like your wine to be?",
+    "Ah, an excellent question! The yeast requires sugar to ferment into alcohol. The sugar in the fermentable provides some of the sugar needed, but it may not be enough to reach the desired alcohol content.",
+    "Water is added to dilute the sugar content of the fermentable. This ensures that the yeast can ferment the sugar into alcohol without the mixture becoming too sweet.",
+    "the ABV or alcohol by volume, of the wine is determined by the amount of sugar in the must. The more sugar, the higher the alcohol content. this can be measured with a hydrometer",
+    "Now, how sweet would you like your wine to be? With 0 being dry and 10 being very sweet",
     "What ABV would you like your wine to be? Keep in mind the higher the ABV...",
     `Ah, you've chosen an ABV of ${abv}%! A fine choice. Now, let us prepare the must for fermentation.`,
   ];
@@ -77,9 +79,11 @@ export default function ABVSweetnessPage() {
   const handleSliderChange = (event: React.ChangeEvent<HTMLInputElement>, type: string) => {
     const value = parseFloat(event.target.value);
     if (type === "sweetness") {
+      setSweetnesss(value);
       setSweetness(value);
     } else {
       setAbv(value);
+      setABV(value);
     }
   };
 
@@ -87,7 +91,7 @@ export default function ABVSweetnessPage() {
   const handleContinue = () => {
     setFadeOut(true); // Trigger the fade out only when the continue button is clicked
     setTimeout(() => {
-      router.push('/next-step');  // Navigate to the next page after fade-out
+      router.push('/must');  // Navigate to the next page after fade-out
     }, 1000);  // Adjust timing if needed
   };
 
@@ -97,12 +101,12 @@ export default function ABVSweetnessPage() {
       animate={{ opacity: fadeOut ? 0 : 1 }}  // Fade out only if the continue button is clicked
       transition={{ duration: 1 }}
       className="relative h-screen bg-cover bg-center"
-      style={{ backgroundImage: `url(${background.src})` }}
+        style={{ backgroundImage: `url(/assets/background/winery.png)` }} // Reference directly from public folder
       onClick={handleNextDialogue}
     >
       {/* Wizard image */}
       <motion.img
-        src={wizardImage.src}
+ src="/assets/wizard.png" // Reference directly from public folder
         alt="Wizard"
         className="absolute left-0 bottom-0 h-3/4"
         initial={{ x: '-100%' }}
@@ -112,7 +116,7 @@ export default function ABVSweetnessPage() {
 
       {/* Dialogue box */}
       <div className="absolute bottom-0 left-0 w-full p-6 bg-gray-800 bg-opacity-70 text-white">
-        <motion.p className="font-pixel text-2xl">
+        <motion.p className="font-pixel2 text-2xl">
           {wizardDialogue[dialogueIndex]}
         </motion.p>
       </div>
@@ -142,9 +146,9 @@ export default function ABVSweetnessPage() {
           <p className="text-white text-lg">Sweetness: {sweetness.toFixed(1)}</p>
           <input
             type="range"
-            min="0.0"
-            max="1.0"
-            step="0.1"
+            min="0"
+            max="10"
+            step="1"
             value={sweetness}
             onChange={(e) => handleSliderChange(e, "sweetness")}
             className="w-64"

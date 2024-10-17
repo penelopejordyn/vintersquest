@@ -3,8 +3,8 @@
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import { motion } from 'framer-motion';
-import background from './assets/background/background.png';
 import { pixel } from './font';
+
 
 export default function Home() {
   const [isFading, setIsFading] = useState(false);
@@ -23,15 +23,19 @@ export default function Home() {
       animate={{ opacity: isFading ? 0 : 1 }}
       transition={{ duration: 1 }}
       className="relative h-screen bg-cover bg-center"
-      style={{ backgroundImage: `url(${background.src})` }}
+      style={{ backgroundImage: `url(/assets/background/background.png)` }} // Reference directly from public folder
     >
       <div className="flex flex-col items-center justify-center h-full">
-        <h1 className={`text-9xl ${pixel.variable} font-pixel text-white drop-shadow-lg animate-up-down`}>
+        <motion.h1
+          className={`text-9xl ${pixel.variable} font-pixel text-white drop-shadow-lg`}
+          animate={{ y: [0, -10, 0] }} // Array for up and down motion
+          transition={{ duration: 1, repeat: Infinity, repeatType: "mirror" }} // Infinite bouncing effect
+        >
           Vintner&#39;s Quest
-        </h1>
+        </motion.h1>
         <button
           onClick={handleStart}
-          className="mt-8 bg-purple-600 text-white font-pixel py-3 px-8 rounded-full text-2xl hover:bg-purple-700"
+          className="mt-8 bg-purple-600 text-white font-pixel2 py-3 px-8 rounded-full text-2xl hover:bg-purple-700"
         >
           Start
         </button>

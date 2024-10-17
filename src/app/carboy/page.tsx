@@ -3,12 +3,14 @@
 import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { useRouter } from 'next/navigation';
-import wizardImage from '../assets/wizard.png';
-import background from '../assets/background/carboy.png';
+
+
+import { useAppContext } from '../context/AppContext';
 
 const carboySizes = [1, 2, 3, 4, 5];
 
 export default function CarboyPage() {
+  const { setCarboySize } = useAppContext();
   const [selectedCarboy, setSelectedCarboy] = useState<number | null>(null);
   const [wizardMessage, setWizardMessage] = useState("");
   const [fadeOut, setFadeOut] = useState(false);
@@ -16,11 +18,11 @@ export default function CarboyPage() {
 
   const handleCarboySelect = (size: number) => {
     setSelectedCarboy(size);
+    setCarboySize(size);  // Set the carboy size in the context
     setWizardMessage(`Ahh, I see you chose the ${size} gallon carboy! Next we should pick out our fermentable!`);
   };
 
-  const handleNext = () => {
-    setFadeOut(true);  // Trigger fade out when the user clicks continue
+  const handleNext = () => {    setFadeOut(true);  // Trigger fade out when the user clicks continue
     setTimeout(() => {
       router.push('/pantry');  // Navigate to the next step
     }, 1000);  // Give time for the fade-out animation
@@ -32,11 +34,11 @@ export default function CarboyPage() {
       animate={{ opacity: fadeOut ? 0 : 1 }}  // Only fade when Continue is clicked
       transition={{ duration: 1 }}
       className="relative h-screen bg-cover bg-center"
-      style={{ backgroundImage: `url(${background.src})` }}
+        style={{ backgroundImage: `url(/assets/background/carboy.png)` }} // Reference directly from public folder
     >
       {/* Wizard image */}
       <motion.img
-        src={wizardImage.src}
+ src="/assets/wizard.png" // Reference directly from public folder
         alt="Wizard"
         className="absolute left-0 bottom-0 h-3/4"
         initial={{ x: '-100%' }}

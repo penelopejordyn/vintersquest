@@ -3,8 +3,8 @@
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { motion } from 'framer-motion';
-import wizardImage from '../assets/wizard.png';
-import background from '../assets/background/background.png';
+
+
 
 const wizardDialogue = [
   "Greetings, traveler! I am the Vintner's Wizard, and I will be your guide through the magical process of winemaking.",
@@ -39,12 +39,12 @@ export default function ClientPage() {
       animate={{ opacity: 1 }}
       transition={{ duration: 1 }}
       className="relative h-screen bg-cover bg-center"
-      style={{ backgroundImage: `url(${background.src})` }}
+        style={{ backgroundImage: `url(/assets/background/winery.png)` }} // Reference directly from public folder
       onClick={handleNextDialogue}
     >
       {/* Wizard image sliding in */}
       <motion.img
-        src={wizardImage.src}
+ src="/assets/wizard.png" // Reference directly from public folder
         alt="Wizard"
         className="absolute left-0 bottom-0 h-3/4"
         initial={{ x: '-100%' }}
@@ -68,7 +68,7 @@ export default function ClientPage() {
           className=" text-center absolute bottom-0 left-0 w-full p-3 bg-gray-800 bg-opacity-70 text-white hover:bg-gray-700
           " onClick={handleYesClick}
         >
-            <p className="font-pixel2 text-4xl">Yes</p>
+            <p className="font-pixel22 text-4xl">Yes</p>
         </motion.div>
       )}
     </motion.div>

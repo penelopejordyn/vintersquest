@@ -3,8 +3,7 @@
 import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { useRouter } from 'next/navigation';
-import wizardImage from '../assets/wizard.png';
-import background from '../assets/background/pantry.png';
+import { useAppContext } from '../context/AppContext';
 
 const fermentables = [
   { name: "Peach", message: "Peaches? A juicy and aromatic choice. Peach wine is a sweet and flavorful beverage." },
@@ -23,9 +22,11 @@ export default function PantryPage() {
   const [wizardMessage, setWizardMessage] = useState("");
   const [fadeOut, setFadeOut] = useState(false);
   const router = useRouter();
+  const { setFermentable } = useAppContext();
 
   const handleFermentableSelect = (fermentable: { name: string; message: string }) => {
     setSelectedFermentable(fermentable.name);
+    setFermentable(fermentable.name);  // Set the fermentable in the context
     setWizardMessage(fermentable.message);
     // Here you could add the fermentable to the user's inventory
   };
@@ -33,7 +34,7 @@ export default function PantryPage() {
   const handleNext = () => {
     setFadeOut(true);
     setTimeout(() => {
-      router.push('/must');  // Navigate to the next page after selection
+      router.push('/abvsweetness');  // Navigate to the next page after selection
     }, 1000);
   };
 
@@ -43,11 +44,11 @@ export default function PantryPage() {
       animate={{ opacity: fadeOut ? 0 : 1 }}
       transition={{ duration: 1 }}
       className="relative h-screen bg-cover bg-center"
-      style={{ backgroundImage: `url(${background.src})` }}
+        style={{ backgroundImage: `url(/assets/background/pantry.png)` }} // Reference directly from public folder
     >
       {/* Wizard image */}
       <motion.img
-        src={wizardImage.src}
+ src="/assets/wizard.png" // Reference directly from public folder
         alt="Wizard"
         className="absolute left-0 bottom-0 h-3/4"
         initial={{ x: '-100%' }}

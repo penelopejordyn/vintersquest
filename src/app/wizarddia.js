@@ -65,6 +65,7 @@ const wizardDialogue = [
     //user clicks airlock before yeast is added
     "Ah, I see you've added the airlock! Remember, the airlock must be added last. We cant seal it up before all ingredients are added. Let's try that again, shall we?", 
     "now that everything is done, we must wait for the fermentation process to complete. This can take anywhere from a few days to a few weeks, depending on the fermentable and the desired ABV.",
+    "In order to make sure the yeast stays healthy, we will use yeast nutients such as fermaid o, fermaid k and diammonium phosphate.",
     "we can measure the progress of fermentation by taking readings with the hydrometer. When the specific gravity reaches 1.000, or has not changed for more than 2 weeks, fermentation is complete.",
     "once fermentation is complete, we can siphon the wine into a clean vessel, leaving the sediment behind. this is known as racking.",
     "racking helps the wine clarify and prevents off flavors from developing.",
